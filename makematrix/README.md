@@ -50,6 +50,28 @@ user7,ad1,A
 user8,ad3,A
 ```
 
+### 2. Help Menu
+To pivot the data using **Users** (index `0`) as rows and **Ads** (index `1`) as columns:
+
+```bash
+go run main.go -h
+```
+
+### 3. Output Matrix
+```text
+Usage: main [-hV] [-c value] [-d value] [-i value] [-r value] [parameters ...]
+ -c, --column=value
+                  Column Field2 (column) [1]
+ -d, --delimiter=value
+                  Delimiter Value Default to comma(,) [,]
+ -h, --help       Display help menu
+ -i, --inputCSV=value
+                  Path to the output file [input.csv]
+ -r, --row=value  Column Field1 (row)
+ -V, --version    Display version info
+```
+
+
 ### 2. Execution Command
 To pivot the data using **Users** (index `0`) as rows and **Ads** (index `1`) as columns:
 
