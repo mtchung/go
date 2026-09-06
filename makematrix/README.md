@@ -57,7 +57,7 @@ To pivot the data using **Users** (index `0`) as rows and **Ads** (index `1`) as
 go run main.go -h
 ```
 
-### 3. Output Matrix
+### 3. Help Menu Output
 ```text
 Usage: main [-hV] [-c value] [-d value] [-i value] [-r value] [parameters ...]
  -c, --column=value
@@ -72,14 +72,14 @@ Usage: main [-hV] [-c value] [-d value] [-i value] [-r value] [parameters ...]
 ```
 
 
-### 2. Execution Command
+### 4. Execution Command
 To pivot the data using **Users** (index `0`) as rows and **Ads** (index `1`) as columns:
 
 ```bash
 go run main.go -i input.csv -r 0 -c 1
 ```
 
-### 3. Output Matrix
+### 5. Output Matrix
 ```text
         ad1     ad2     ad3     ad4     ad5
 user1   Y       .       .       .       .
@@ -92,14 +92,14 @@ user7   Y       .       .       .       .
 user8   .       .       Y       .       .
 ```
 
-### 4. Execution Command
+### 6. Execution Command
 To pivot the data using **Users** (index `1) as rows and **Ads** (index `0`) as columns:
 
 ```bash
 go run main.go -i input.csv -r 1 -c 0
 ```
 
-### 5. Output Matrix
+### 7. Output Matrix
 ```text
         user1   user2   user3   user4   user5   user6   user7   user8
 ad1     Y       .       .       .       Y       .       Y       .
