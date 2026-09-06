@@ -93,7 +93,7 @@ user8   .       .       Y       .       .
 ```
 
 ### 6. Execution Command
-To pivot the data using **Users** (index `1) as rows and **Ads** (index `0`) as columns:
+To pivot the data using **Users** (index `1`) as rows and **Ads** (index `0`) as columns:
 
 ```bash
 go run main.go -i input.csv -r 1 -c 0
