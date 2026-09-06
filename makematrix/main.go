@@ -12,9 +12,9 @@ import (
 	"github.com/pborman/getopt/v2"
 )
 
-type colRowKey struct {
-	User  string
-	Group string
+type rowColKey struct {
+	Row string
+	Col string
 }
 
 func main() {
@@ -44,19 +44,19 @@ func main() {
 	}
 
 	// 4. Access parsed values
-	fmt.Printf("DEBUG Read from to: %s row:%d col:%d del:%s\n", *inputFile, *row, *col, *del)
+	//fmt.Printf("DEBUG Read from to: %s row:%d col:%d del:%s\n", *inputFile, *row, *col, *del)
 
-	// 1. Open the delimited file
+	// 5. Open the delimited file
 	file, err := os.Open(*inputFile)
 	if err != nil {
 		log.Fatalf("Failed to open file: %s", err)
 	}
 	defer file.Close()
 
-	// 2. Initialize the CSV reader
+	// 6. Initialize the CSV reader
 	reader := csv.NewReader(file)
 
-	// 3. Define your custom delimiter (e.g., Use '\t' for TSV, ';' for semicolon)
+	// 7. Define your custom delimiter (e.g., Use '\t' for TSV, ';' for semicolon)
 	// Convert the first character of the string to a rune
 	if len(*del) > 0 {
 		reader.Comma = []rune(*del)[0]
@@ -64,8 +64,8 @@ func main() {
 		reader.Comma = ',' // Fallback default if string is empty
 	}
 
-	// 4. Loop through the file line-by-line
-	colRow := make(map[colRowKey]string)
+	// 8. Loop through the file line-by-line
+	rowCol := make(map[rowColKey]string)
 	uniqueCol := make(map[string]string)
 	uniqueRow := make(map[string]string)
 
@@ -80,42 +80,49 @@ func main() {
 			log.Fatalf("Error reading record: %s", err)
 		}
 
-		user := record[*row]
-		group := record[*col]
+		theRow := record[*row]
+		theCol := record[*col]
 
-		uniqueCol[user] = "Y"
-		uniqueRow[group] = "Y"
-		colRow[colRowKey{User: user, Group: group}] = "Y"
+		// Save records into row and cols hashmap
+		uniqueCol[theCol] = "Y"
+		uniqueRow[theRow] = "Y"
+		rowCol[rowColKey{Row: theRow, Col: theCol}] = "Y"
 	}
 
-	sortedGroups := make([]string, 0, len(uniqueRow))
+	// Make sorted column slice
+	sortedCols := make([]string, 0, len(uniqueCol))
 
-	for g := range uniqueRow {
-		sortedGroups = append(sortedGroups, g)
+	for g := range uniqueCol {
+		sortedCols = append(sortedCols, g)
 	}
 
-	sortedUsers := make([]string, 0, len(uniqueCol))
+	// Make sorted rows slice
+	sortedRows := make([]string, 0, len(uniqueRow))
 
-	for u := range uniqueCol {
-		sortedUsers = append(sortedUsers, u)
+	for u := range uniqueRow {
+		sortedRows = append(sortedRows, u)
 	}
 
-	slices.Sort(sortedUsers)
-	slices.Sort(sortedGroups)
+	// Make sorted rows and columns
+	slices.Sort(sortedRows)
+	slices.Sort(sortedCols)
 
-	fmt.Printf("Name\t")
-	for _, groupName := range sortedGroups {
-		fmt.Printf("%s\t", groupName)
+	fmt.Printf("\t")
+
+	// Print columns
+	for _, colName := range sortedCols {
+		fmt.Printf("%s\t", colName)
 	}
 	fmt.Printf("\n")
 
-	for _, userVal := range sortedUsers {
+	for _, rowVal := range sortedRows {
 
-		fmt.Printf("%s\t", userVal)
-		for _, groupVal := range sortedGroups {
-			keyToFind := colRowKey{User: userVal, Group: groupVal}
+		// Print columns
+		fmt.Printf("%s\t", rowVal)
+		for _, colVal := range sortedCols {
+			keyToFind := rowColKey{Row: rowVal, Col: colVal}
 
-			_, exists := colRow[keyToFind]
+			_, exists := rowCol[keyToFind]
 			if exists {
 				fmt.Printf("%s\t", "Y")
 			} else {
