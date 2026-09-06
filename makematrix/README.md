@@ -33,7 +33,7 @@ go run main.go -i <input_file> -d <delimiter_value> -r <row_column_index> -c <co
 | `-r` | Zero-based index for the **row** data | `int` | Yes | 0 |
 | `-c` | Zero-based index for the **column** data | `int` | Yes | 1 |
 | `-h` | Help | `string` | No | N/A |
-
+| `-v` | Version | `string` | No | N/A |
 ---
 
 ## 📋 Example
