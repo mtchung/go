@@ -26,11 +26,12 @@ go run main.go -i <input_file> -r <row_column_index> -c <column_column_index>
 
 ### Flags
 
-| Flag | Description | Type | Required |
-| :--- | :--- | :--- | :--- |
-| `-i` | Path to the input CSV file | `string` | Yes |
-| `-r` | Zero-based index for the **row** data | `int` | Yes |
-| `-c` | Zero-based index for the **column** data | `int` | Yes |
+| Flag | Description | Type | Required | Default |
+| :--- | :--- | :--- | :--- | :--- |
+| `-i` | Path to the input CSV file | `string` | Yes | input.csv |
+| `-d` | Custom Delimiter | `string` | Yes | , |
+| `-r` | Zero-based index for the **row** data | `int` | Yes | 0 |
+| `-c` | Zero-based index for the **column** data | `int` | Yes | 1 |
 
 ---
 
