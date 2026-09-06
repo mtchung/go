@@ -21,7 +21,7 @@ Ensure you have [Go](https://go.dev) installed (version 1.16 or higher recommend
 
 ### Syntax
 ```bash
-go run main.go -i <input_file> -d <delimiter_value> -r <row_column_index> -c <column_column_index> 
+go run main.go -i <input-csv> -d <input-delimiter> -d <output-delimiter>  -r <row column_index> -c <column column_index> 
 ```
 
 ### Flags
