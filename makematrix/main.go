@@ -25,7 +25,8 @@ func main() {
 
 	// Example of a flag that takes a string argument
 	inputFile := getopt.StringLong("inputCSV", 'i', "input.csv", "Path to the output file")
-	del := getopt.StringLong("delimiter", 'd', ",", "Delimiter Value Default to comma(,)")
+	inputDelimiter := getopt.StringLong("input-delimiter", 'd', ",", "Delimiter Value Default to comma(,)")
+	outputDelimiter := getopt.StringLong("output-delimiter", 'o', "\t", "Delimiter Value Default to comma(,)")
 	row := getopt.IntLong("row", 'r', 0, "Column Field1 (row)")
 	col := getopt.IntLong("column", 'c', 1, "Column Field2 (column)")
 
@@ -58,8 +59,8 @@ func main() {
 
 	// 7. Define your custom delimiter (e.g., Use '\t' for TSV, ';' for semicolon)
 	// Convert the first character of the string to a rune
-	if len(*del) > 0 {
-		reader.Comma = []rune(*del)[0]
+	if len(*inputDelimiter) > 0 {
+		reader.Comma = []rune(*inputDelimiter)[0]
 	} else {
 		reader.Comma = ',' // Fallback default if string is empty
 	}
@@ -107,26 +108,26 @@ func main() {
 	slices.Sort(sortedRows)
 	slices.Sort(sortedCols)
 
-	fmt.Printf("\t")
+	fmt.Printf("%s", *outputDelimiter)
 
 	// Print columns
 	for _, colName := range sortedCols {
-		fmt.Printf("%s\t", colName)
+		fmt.Printf("%s%s", colName, *outputDelimiter)
 	}
 	fmt.Printf("\n")
 
 	for _, rowVal := range sortedRows {
 
 		// Print columns
-		fmt.Printf("%s\t", rowVal)
+		fmt.Printf("%s%s", rowVal, *outputDelimiter)
 		for _, colVal := range sortedCols {
 			keyToFind := rowColKey{Row: rowVal, Col: colVal}
 
 			_, exists := rowCol[keyToFind]
 			if exists {
-				fmt.Printf("%s\t", "Y")
+				fmt.Printf("%s%s", "Y", *outputDelimiter)
 			} else {
-				fmt.Printf("%s\t", ".")
+				fmt.Printf("%s%s", ".", *outputDelimiter)
 			}
 		}
 		fmt.Printf("\n")

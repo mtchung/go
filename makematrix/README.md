@@ -29,7 +29,8 @@ go run main.go -i <input_file> -d <delimiter_value> -r <row_column_index> -c <co
 | Flag | Description | Type | Mandatory | Default |
 | :--- | :--- | :--- | :--- | :--- |
 | `-i` | Path to the input CSV file | `string` | Yes | input.csv |
-| `-d` | Custom Delimiter | `string` | Yes | , |
+| `-d` | Input Delimiter | `string` | Yes | , |
+| `-o` | Output Delimiter | `string` | Yes | \t |
 | `-r` | Zero-based index for the **row** data | `int` | Yes | 0 |
 | `-c` | Zero-based index for the **column** data | `int` | Yes | 1 |
 | `-h` | Help | `string` | No | N/A |
