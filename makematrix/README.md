@@ -67,3 +67,20 @@ user6   .       .       .       .       Y
 user7   Y       .       .       .       .
 user8   .       .       Y       .       .
 ```
+
+### 4. Execution Command
+To pivot the data using **Users** (index `1) as rows and **Ads** (index `0`) as columns:
+
+```bash
+go run main.go -i input.csv -r 1 -c 0
+```
+
+### 5. Output Matrix
+```text
+        user1   user2   user3   user4   user5   user6   user7   user8
+ad1     Y       .       .       .       Y       .       Y       .
+ad2     .       Y       .       .       .       .       .       .
+ad3     .       .       Y       .       .       .       .       Y
+ad4     .       .       .       Y       .       .       .       .
+ad5     .       .       .       .       .       Y       .       .
+```
